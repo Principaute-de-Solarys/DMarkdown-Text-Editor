@@ -6,6 +6,7 @@ Public Class Settings
     Private Sub Settings_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SizeTxt.Text = My.Settings.taille
         updateBtn.Text = My.Settings.maj.ToString
+        nitroBtn.Text = My.Settings.nitro.ToString
         If My.Settings.langue = "fr" Then
             LanguageLbl.Text = "Langue :"
             SizeLbl.Text = "Taille :"
@@ -47,6 +48,16 @@ Public Class Settings
         ElseIf updateBtn.Text = "False" Then
             My.Settings.maj = True
             updateBtn.Text = "True"
+        End If
+    End Sub
+
+    Private Sub nitroBtn_Click(sender As Object, e As EventArgs) Handles nitroBtn.Click
+        If nitroBtn.Text = "True" Then
+            My.Settings.nitro = False
+            nitroBtn.Text = "False"
+        ElseIf nitroBtn.Text = "False" Then
+            My.Settings.nitro = True
+            nitroBtn.Text = "True"
         End If
     End Sub
 End Class

@@ -1,11 +1,12 @@
 ﻿Imports System.IO
 Imports System.Net
+Imports System.Text
 Public Class DMarkdown
-    Dim ver As String = "0.0.0.1", downloadUrl As String = "https://github.com/Principaute-de-Solarys/DMarkdown-Text-Editor/releases/latest/download/DMarkdownTextEditor.zip", localPath As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\DMarkdownTextEditor\" & ver, localFile = localPath & "\update.zip"
+    Dim ver As String = "0.0.0.2", downloadUrl As String = "https://github.com/Principaute-de-Solarys/DMarkdown-Text-Editor/releases/latest/download/DMarkdownTextEditor.zip", localPath As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\DMarkdownTextEditor\" & ver, localFile = localPath & "\update.zip"
     Dim msgUpdateStr As String = "There is an update available, do you want to download it ?", msgUpdateTtl As String = "Update / Version : "
     Dim msgSuccessUpdate As String = "The update was successfully downloaded, the installation will shortly begin.", msgSuccessUpdateTtl As String = "Successfully downloaded", msgError As String = "Error : "
     Dim msgNewDocStr As String = "Do you really want to create a new document ?", msgNewDocTtl As String = "New document", msgCloseSaveStr As String = "You are closing while your document isn't saved. Do you want to save it ?", msgCloseSaveTtl As String = "Unsaved"
-    Dim dmd As String = "DMarkdown file|*.dmd"
+    Dim dmd As String = "DMarkdown file|*.dmd", untitled As String = "Untitled"
     Dim curFile As String
     Dim normalSize As Single = 9 * My.Settings.taille, smallSize As Single = 7 * My.Settings.taille, h3Size As Single = 11 * My.Settings.taille, h2Size As Single = 13 * My.Settings.taille, h1Size As Single = 15 * My.Settings.taille
     Private Sub DMarkdown_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -42,6 +43,7 @@ Public Class DMarkdown
                 MarkdownToRtf(RichTextBox1, IO.File.ReadAllText(curFile))
             Else
                 Me.Text = "DMarkdown Text Editor - Sans titre"
+                untitled = "Sans titre"
             End If
         Else
             If Not My.Settings.dernier = "" Then
@@ -90,7 +92,7 @@ Public Class DMarkdown
             RichTextBox1.Clear()
             curFile = ""
             My.Settings.dernier = ""
-            Me.Text = "DMarkdown Text Editor - Untitled"
+            Me.Text = "DMarkdown Text Editor - " & untitled
         End If
     End Sub
 
@@ -333,5 +335,35 @@ Public Class DMarkdown
 
     Private Sub SettingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SettingsToolStripMenuItem.Click
         Settings.Show()
+    End Sub
+
+    Private Sub ExportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportToolStripMenuItem.Click
+        Dim save As New FolderBrowserDialog
+        If save.ShowDialog = DialogResult.OK Then
+            Dim message As New StringBuilder
+            Dim folder As String = save.SelectedPath
+            Dim text As String = RtfToMarkdown(RichTextBox1)
+            Dim lines() As String = text.Split(New String() {vbLf}, StringSplitOptions.None)
+            Dim sizeMsg As Integer = 2000
+            Dim idx As Integer = 0
+            If My.Settings.nitro Then
+                sizeMsg = 4000
+            End If
+            For Each line As String In lines
+                If Not message.Length + line.Length > sizeMsg Then
+                    If Not message.Length < 0 Then
+                        message.Append(vbCrLf & line)
+                    Else
+                        message.Append(line)
+                    End If
+                Else
+                    IO.File.WriteAllText(folder & "\message" & idx.ToString & ".txt", message.ToString)
+                    message.Clear()
+                    idx += 1
+                End If
+            Next
+            IO.File.WriteAllText(folder & "\message" & idx.ToString & ".txt", message.ToString)
+            Process.Start("C:\Windows\explorer.exe", folder)
+        End If
     End Sub
 End Class

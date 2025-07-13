@@ -36,8 +36,8 @@ Partial Class DMarkdown
         StrikethroughToolStripMenuItem = New ToolStripMenuItem()
         IncreaseSizeToolStripMenuItem = New ToolStripMenuItem()
         DecreaseSizeToolStripMenuItem = New ToolStripMenuItem()
-        DecreaseIndentationToolStripMenuItem = New ToolStripMenuItem()
         IndentToolStripMenuItem = New ToolStripMenuItem()
+        DecreaseIndentationToolStripMenuItem = New ToolStripMenuItem()
         UnorderedListToolStripMenuItem = New ToolStripMenuItem()
         SettingsToolStripMenuItem = New ToolStripMenuItem()
         MenuStrip1.SuspendLayout()
@@ -58,7 +58,7 @@ Partial Class DMarkdown
         ' 
         MenuStrip1.BackColor = SystemColors.ControlDarkDark
         MenuStrip1.ImageScalingSize = New Size(24, 24)
-        MenuStrip1.Items.AddRange(New ToolStripItem() {NewToolStripMenuItem, SaveToolStripMenuItem, SaveToolStripMenuItem1, OpenToolStripMenuItem, ExportToolStripMenuItem, BoldToolStripMenuItem, ItalicToolStripMenuItem, UnderlineToolStripMenuItem, StrikethroughToolStripMenuItem, IncreaseSizeToolStripMenuItem, DecreaseSizeToolStripMenuItem, DecreaseIndentationToolStripMenuItem, IndentToolStripMenuItem, UnorderedListToolStripMenuItem, SettingsToolStripMenuItem})
+        MenuStrip1.Items.AddRange(New ToolStripItem() {NewToolStripMenuItem, SaveToolStripMenuItem, SaveToolStripMenuItem1, OpenToolStripMenuItem, ExportToolStripMenuItem, BoldToolStripMenuItem, ItalicToolStripMenuItem, UnderlineToolStripMenuItem, StrikethroughToolStripMenuItem, IncreaseSizeToolStripMenuItem, DecreaseSizeToolStripMenuItem, IndentToolStripMenuItem, DecreaseIndentationToolStripMenuItem, UnorderedListToolStripMenuItem, SettingsToolStripMenuItem})
         MenuStrip1.Location = New Point(0, 0)
         MenuStrip1.Name = "MenuStrip1"
         MenuStrip1.Size = New Size(784, 32)
@@ -164,15 +164,6 @@ Partial Class DMarkdown
         DecreaseSizeToolStripMenuItem.Size = New Size(36, 28)
         DecreaseSizeToolStripMenuItem.Text = "Decrease size"
         ' 
-        ' DecreaseIndentationToolStripMenuItem
-        ' 
-        DecreaseIndentationToolStripMenuItem.DisplayStyle = ToolStripItemDisplayStyle.Image
-        DecreaseIndentationToolStripMenuItem.Image = My.Resources.Resources.DecreaseIndent
-        DecreaseIndentationToolStripMenuItem.Name = "DecreaseIndentationToolStripMenuItem"
-        DecreaseIndentationToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.Left
-        DecreaseIndentationToolStripMenuItem.Size = New Size(36, 28)
-        DecreaseIndentationToolStripMenuItem.Text = "Decrease indentation"
-        ' 
         ' IndentToolStripMenuItem
         ' 
         IndentToolStripMenuItem.DisplayStyle = ToolStripItemDisplayStyle.Image
@@ -181,6 +172,15 @@ Partial Class DMarkdown
         IndentToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.Right
         IndentToolStripMenuItem.Size = New Size(36, 28)
         IndentToolStripMenuItem.Text = "Indent"
+        ' 
+        ' DecreaseIndentationToolStripMenuItem
+        ' 
+        DecreaseIndentationToolStripMenuItem.DisplayStyle = ToolStripItemDisplayStyle.Image
+        DecreaseIndentationToolStripMenuItem.Image = My.Resources.Resources.DecreaseIndent
+        DecreaseIndentationToolStripMenuItem.Name = "DecreaseIndentationToolStripMenuItem"
+        DecreaseIndentationToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.Left
+        DecreaseIndentationToolStripMenuItem.Size = New Size(36, 28)
+        DecreaseIndentationToolStripMenuItem.Text = "Decrease indentation"
         ' 
         ' UnorderedListToolStripMenuItem
         ' 

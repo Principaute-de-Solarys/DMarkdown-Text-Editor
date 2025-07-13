@@ -92,13 +92,25 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
         Public Property maj() As Boolean
             Get
                 Return CType(Me("maj"),Boolean)
             End Get
             Set
                 Me("maj") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property nitro() As Boolean
+            Get
+                Return CType(Me("nitro"),Boolean)
+            End Get
+            Set
+                Me("nitro") = value
             End Set
         End Property
     End Class

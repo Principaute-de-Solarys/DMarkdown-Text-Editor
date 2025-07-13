@@ -31,6 +31,8 @@ Partial Class Settings
         SizeTxt = New TextBox()
         Label1 = New Label()
         updateBtn = New Button()
+        nitroBtn = New Button()
+        Label2 = New Label()
         SuspendLayout()
         ' 
         ' ApplyBtn
@@ -109,12 +111,32 @@ Partial Class Settings
         updateBtn.Text = "Button1"
         updateBtn.UseVisualStyleBackColor = True
         ' 
+        ' nitroBtn
+        ' 
+        nitroBtn.Location = New Point(172, 92)
+        nitroBtn.Name = "nitroBtn"
+        nitroBtn.Size = New Size(600, 23)
+        nitroBtn.TabIndex = 9
+        nitroBtn.Text = "Button1"
+        nitroBtn.UseVisualStyleBackColor = True
+        ' 
+        ' Label2
+        ' 
+        Label2.AutoSize = True
+        Label2.Location = New Point(12, 96)
+        Label2.Name = "Label2"
+        Label2.Size = New Size(83, 15)
+        Label2.TabIndex = 8
+        Label2.Text = "Discord Nitro :"
+        ' 
         ' Settings
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = SystemColors.ControlDark
         ClientSize = New Size(784, 361)
+        Controls.Add(nitroBtn)
+        Controls.Add(Label2)
         Controls.Add(updateBtn)
         Controls.Add(Label1)
         Controls.Add(SizeTxt)
@@ -138,4 +160,6 @@ Partial Class Settings
     Friend WithEvents SizeTxt As TextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents updateBtn As Button
+    Friend WithEvents nitroBtn As Button
+    Friend WithEvents Label2 As Label
 End Class
