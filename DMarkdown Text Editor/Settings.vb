@@ -1,9 +1,11 @@
 ﻿Imports System.Net
+Imports System.IO
+Imports System.Text
 Public Class Settings
-    Dim ver As String = "0.0.0.1"
     Dim msgSizeErrStr As String = "The text entered for the size isn't in a valid format, please enter a number between 1 and 2 with a comma.", msgSizeErrTtl As String = "Error"
     Private Sub Settings_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SizeTxt.Text = My.Settings.taille
+        updateBtn.Text = My.Settings.maj.ToString
         If My.Settings.langue = "fr" Then
             LanguageLbl.Text = "Langue :"
             SizeLbl.Text = "Taille :"
@@ -12,7 +14,6 @@ Public Class Settings
             msgSizeErrTtl = "Erreur"
             ApplyBtn.Text = "Appliquer"
             CancelBtn.Text = "Annuler"
-            UpdateBtn.Text = "Mettre à jour"
         End If
     End Sub
 
@@ -39,7 +40,13 @@ Public Class Settings
         DMarkdown.Close()
     End Sub
 
-    Private Sub UpdateBtn_Click(sender As Object, e As EventArgs) Handles UpdateBtn.Click
-
+    Private Sub updateBtn_Click(sender As Object, e As EventArgs) Handles updateBtn.Click
+        If updateBtn.Text = "True" Then
+            My.Settings.maj = False
+            updateBtn.Text = "False"
+        ElseIf updateBtn.Text = "False" Then
+            My.Settings.maj = True
+            updateBtn.Text = "True"
+        End If
     End Sub
 End Class

@@ -29,7 +29,8 @@ Partial Class Settings
         SizeLbl = New Label()
         LanguageTxt = New TextBox()
         SizeTxt = New TextBox()
-        UpdateBtn = New Button()
+        Label1 = New Label()
+        updateBtn = New Button()
         SuspendLayout()
         ' 
         ' ApplyBtn
@@ -90,16 +91,23 @@ Partial Class Settings
         SizeTxt.TabIndex = 5
         SizeTxt.Text = "1"
         ' 
-        ' UpdateBtn
+        ' Label1
         ' 
-        UpdateBtn.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
-        UpdateBtn.BackColor = SystemColors.Control
-        UpdateBtn.Location = New Point(505, 326)
-        UpdateBtn.Name = "UpdateBtn"
-        UpdateBtn.Size = New Size(105, 23)
-        UpdateBtn.TabIndex = 6
-        UpdateBtn.Text = "Update"
-        UpdateBtn.UseVisualStyleBackColor = False
+        Label1.AutoSize = True
+        Label1.Location = New Point(12, 67)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(81, 15)
+        Label1.TabIndex = 6
+        Label1.Text = "Auto-update :"
+        ' 
+        ' updateBtn
+        ' 
+        updateBtn.Location = New Point(172, 63)
+        updateBtn.Name = "updateBtn"
+        updateBtn.Size = New Size(600, 23)
+        updateBtn.TabIndex = 7
+        updateBtn.Text = "Button1"
+        updateBtn.UseVisualStyleBackColor = True
         ' 
         ' Settings
         ' 
@@ -107,7 +115,8 @@ Partial Class Settings
         AutoScaleMode = AutoScaleMode.Font
         BackColor = SystemColors.ControlDark
         ClientSize = New Size(784, 361)
-        Controls.Add(UpdateBtn)
+        Controls.Add(updateBtn)
+        Controls.Add(Label1)
         Controls.Add(SizeTxt)
         Controls.Add(LanguageTxt)
         Controls.Add(SizeLbl)
@@ -127,5 +136,6 @@ Partial Class Settings
     Friend WithEvents SizeLbl As Label
     Friend WithEvents LanguageTxt As TextBox
     Friend WithEvents SizeTxt As TextBox
-    Friend WithEvents UpdateBtn As Button
+    Friend WithEvents Label1 As Label
+    Friend WithEvents updateBtn As Button
 End Class

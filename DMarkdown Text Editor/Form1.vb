@@ -1,5 +1,9 @@
 ﻿Imports System.IO
+Imports System.Net
 Public Class DMarkdown
+    Dim ver As String = "0.0.0.1", downloadUrl As String = "https://github.com/Principaute-de-Solarys/DMarkdown-Text-Editor/releases/latest/download/DMarkdownTextEditor.exe", localPath As String = "%UserProfile%\Downloads\DMarkdownTextEditor.exe"
+    Dim msgUpdateStr As String = "There is an update available, do you want to download it ?", msgUpdateTtl As String = "Update / Version : "
+    Dim msgSuccessUpdate As String = "The update was successfully downloaded in the download folder.", msgSuccessUpdateTtl As String = "Successfully downloaded", msgError As String = "Error : "
     Dim msgNewDocStr As String = "Do you really want to create a new document ?", msgNewDocTtl As String = "New document", msgCloseSaveStr As String = "You are closing while your document isn't saved. Do you want to save it ?", msgCloseSaveTtl As String = "Unsaved"
     Dim dmd As String = "DMarkdown file|*.dmd"
     Dim curFile As String
@@ -11,6 +15,11 @@ Public Class DMarkdown
             msgNewDocTtl = "Nouveau document"
             msgCloseSaveStr = "Vous êtes en train de fermer l'application alors que votre document n'est pas sauvegardé. Voulez-vous le sauvegarder ?"
             msgCloseSaveTtl = "Non sauvegardé"
+            msgUpdateStr = "Il y a une mise à jour disponible, voulez-vous la télécharger ?"
+            msgUpdateTtl = "Mise à jour / Version : "
+            msgSuccessUpdate = "La mise à jour a été téléchargée dans le dossier des téléchargements."
+            msgSuccessUpdateTtl = "Téléchargé avec succès"
+            msgError = "Erreur : "
             NewToolStripMenuItem.Text = "Nouveau document"
             SaveToolStripMenuItem.Text = "Sauvegarder en tant que..."
             SaveToolStripMenuItem1.Text = "Sauvegarder"
@@ -43,6 +52,25 @@ Public Class DMarkdown
             Else
                 Me.Text = "DMarkdown Text Editor - Untitled"
             End If
+        End If
+        If My.Settings.maj Then
+            Dim addr As String = "https://raw.githubusercontent.com/Principaute-de-Solarys/DMarkdown-Text-Editor/master/version.txt"
+            Dim client As New WebClient()
+            Try
+                Dim content As String = client.DownloadString(addr)
+                If Not ver = content Then
+                    If MessageBox.Show(msgUpdateStr, msgUpdateTtl & content, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                        Try
+                            client.DownloadFile(downloadUrl, localPath)
+                            MessageBox.Show(msgSuccessUpdate, msgSuccessUpdateTtl, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        Catch ex As Exception
+                            MessageBox.Show(msgError & ex.Message, msgError, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        End Try
+                    End If
+                End If
+            Catch ex As Exception
+                MessageBox.Show(msgError & ex.Message, msgError, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
         End If
     End Sub
 
