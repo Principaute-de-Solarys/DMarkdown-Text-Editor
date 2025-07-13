@@ -1,9 +1,9 @@
 ﻿Imports System.IO
 Imports System.Net
 Public Class DMarkdown
-    Dim ver As String = "0.0.0.1", downloadUrl As String = "https://github.com/Principaute-de-Solarys/DMarkdown-Text-Editor/releases/latest/download/DMarkdownTextEditor.exe", localPath As String = "%UserProfile%\Downloads\DMarkdownTextEditor.exe"
+    Dim ver As String = "0.0.0.1", downloadUrl As String = "https://github.com/Principaute-de-Solarys/DMarkdown-Text-Editor/releases/latest/download/DMarkdownTextEditor.zip", localPath As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\DMarkdownTextEditor\" & ver, localFile = localPath & "\update.zip"
     Dim msgUpdateStr As String = "There is an update available, do you want to download it ?", msgUpdateTtl As String = "Update / Version : "
-    Dim msgSuccessUpdate As String = "The update was successfully downloaded in the download folder.", msgSuccessUpdateTtl As String = "Successfully downloaded", msgError As String = "Error : "
+    Dim msgSuccessUpdate As String = "The update was successfully downloaded, the installation will shortly begin.", msgSuccessUpdateTtl As String = "Successfully downloaded", msgError As String = "Error : "
     Dim msgNewDocStr As String = "Do you really want to create a new document ?", msgNewDocTtl As String = "New document", msgCloseSaveStr As String = "You are closing while your document isn't saved. Do you want to save it ?", msgCloseSaveTtl As String = "Unsaved"
     Dim dmd As String = "DMarkdown file|*.dmd"
     Dim curFile As String
@@ -17,7 +17,7 @@ Public Class DMarkdown
             msgCloseSaveTtl = "Non sauvegardé"
             msgUpdateStr = "Il y a une mise à jour disponible, voulez-vous la télécharger ?"
             msgUpdateTtl = "Mise à jour / Version : "
-            msgSuccessUpdate = "La mise à jour a été téléchargée dans le dossier des téléchargements."
+            msgSuccessUpdate = "La mise à jour a été téléchargée, l'installation va bientôt commencer."
             msgSuccessUpdateTtl = "Téléchargé avec succès"
             msgError = "Erreur : "
             NewToolStripMenuItem.Text = "Nouveau document"
@@ -61,8 +61,19 @@ Public Class DMarkdown
                 If Not ver = content Then
                     If MessageBox.Show(msgUpdateStr, msgUpdateTtl & content, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                         Try
-                            client.DownloadFile(downloadUrl, localPath)
+                            If Not IO.Directory.Exists(localPath) Then
+                                IO.Directory.CreateDirectory(localPath)
+                            End If
+                            client.DownloadFile(downloadUrl, localFile)
                             MessageBox.Show(msgSuccessUpdate, msgSuccessUpdateTtl, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                            Try
+                                IO.Compression.ZipFile.ExtractToDirectory(localFile, localPath & "\update")
+                                Process.Start(localPath & "\update\setup.exe")
+                                Me.Text = "Updating..."
+                                Me.Close()
+                            Catch ex As Exception
+                                MessageBox.Show(msgError & ex.Message, msgError, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            End Try
                         Catch ex As Exception
                             MessageBox.Show(msgError & ex.Message, msgError, MessageBoxButtons.OK, MessageBoxIcon.Error)
                         End Try
