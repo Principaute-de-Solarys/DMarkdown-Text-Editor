@@ -1,6 +1,5 @@
 ﻿Imports System.IO
 Public Class DMarkdown
-    Dim ver As String = "0.0.0.1"
     Dim msgNewDocStr As String = "Do you really want to create a new document ?", msgNewDocTtl As String = "New document", msgCloseSaveStr As String = "You are closing while your document isn't saved. Do you want to save it ?", msgCloseSaveTtl As String = "Unsaved"
     Dim dmd As String = "DMarkdown file|*.dmd"
     Dim curFile As String

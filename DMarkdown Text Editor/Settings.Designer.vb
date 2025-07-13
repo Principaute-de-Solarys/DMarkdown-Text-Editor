@@ -94,9 +94,9 @@ Partial Class Settings
         ' 
         UpdateBtn.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
         UpdateBtn.BackColor = SystemColors.Control
-        UpdateBtn.Location = New Point(535, 326)
+        UpdateBtn.Location = New Point(505, 326)
         UpdateBtn.Name = "UpdateBtn"
-        UpdateBtn.Size = New Size(75, 23)
+        UpdateBtn.Size = New Size(105, 23)
         UpdateBtn.TabIndex = 6
         UpdateBtn.Text = "Update"
         UpdateBtn.UseVisualStyleBackColor = False
